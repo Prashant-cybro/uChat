@@ -1,0 +1,53 @@
+package com.prashant.uchat.ModelClass;
+
+public class Messages {
+    String message;
+    String senderId;
+    long timestamp;
+
+    public Messages() {
+    }
+
+    public Messages(String message, String senderId, long timestamp) {
+        try {
+            this.message = AESUtils.encrypt(message);
+        } catch (Exception e) {
+            this.message = message;
+        }
+        this.senderId = senderId;
+        this.timestamp = timestamp;
+    }
+
+    public String getMessage() {
+        try {
+            return AESUtils.decrypt(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
+    }
+
+    public void setMessage(String message) {
+        try {
+            this.message = AESUtils.encrypt(message);
+        } catch (Exception e) {
+            this.message = message;
+        }
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+}
